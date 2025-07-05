@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn a Word Daily – Flashcards</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f0ff;
+      color: #333;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 20px;
+    }
+    h1 { color: #4a3f75; margin-bottom: 10px; }
+    .level-select { margin-bottom: 20px; }
+    .level-select button {
+      margin: 0 5px; padding: 8px 16px; font-size: 1rem;
+      border: none; border-radius: 5px; cursor: pointer;
+      background: #e6e0ff; color: #4a3f75;
+    }
+    .level-select button.active { background: #4a3f75; color: #fff; }
+
+    .flashcard-slider {
+      position: relative;
+      width: 320px; height: 360px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .card {
+      flex: 0 0 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card .word {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4a3f75;
+    }
+
+    .nav-buttons {
+      position: absolute;
+      top: 50%;
+      left: -40px; right: -40px;
+      width: calc(100% + 80px);
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .nav-buttons button {
+      pointer-events: auto;
+      background: #d1c8ff;
+      border: none;
+      border-radius: 50%;
+      padding: 8px 12px;
+      font-size: 20px;
+      color: #4a3f75;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background 0.3s;
+    }
+
+    .nav-buttons button:hover {
+      background: #b7aaff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Learn a Word Daily 🚀</h1>
+  <div class="level-select">
+    <button data-level="easy" class="active">Easy</button>
+    <button data-level="medium">Medium</button>
+    <button data-level="hard">Hard</button>
+  </div>
+
+  <div class="flashcard-slider">
+    <div class="slides"></div>
+    <div class="nav-buttons">
+      <button id="prev">❮</button>
+      <button id="next">❯</button>
+    </div>
+  </div>
+
+  <script>
+    const WORDS = {
+      easy: [
+        "eat","toilet","bath","stop","drink",
+        "sleep","play","come","go","sit",
+        "happy","sad","pain","help","more",
+        "finished","sorry","please","thank you",
+        "love you","milk","water","apple",
+        "banana","ball","book","light","shoes"
+      ],
+      medium: [
+        "school","teacher","friend","family","house",
+        "garden","sun","moon","star","flower",
+        "dog","cat","bird","car","bus",
+        "bike","river","mountain","tree","computer",
+        "phone","chair","table","window","door"
+      ],
+      hard: [
+        "elephant","umbrella","restaurant","adventure","diamond",
+        "electricity","butterfly","airplane","hospital","telephone",
+        "kitchen","library","theater","chocolate","waterfall",
+        "mountain","volcano","earthquake","astronomy","philosophy",
+        "architecture","psychology","geometry","biology","chemistry"
+      ],
+    };
+
+    const levelButtons = document.querySelectorAll('.level-select button');
+    const slidesContainer = document.querySelector('.slides');
+    let currentLevel = 'easy';
+    let currentIndex = 0;
+
+    function loadSlides(level) {
+      slidesContainer.innerHTML = '';
+      WORDS[level].forEach(word => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const img = document.createElement('img');
+        img.src = `images/${word.replace(/ /g,'_')}.jpg`;
+        img.alt = word;
+        const w = document.createElement('div');
+        w.className = 'word';
+        w.textContent = word.charAt(0).toUpperCase() + word.slice(1);
+        card.append(img, w);
+        slidesContainer.append(card);
+      });
+      currentIndex = 0;
+      updateSlider();
+    }
+
+    function updateSlider() {
+      const width = document.querySelector('.flashcard-slider').clientWidth;
+      slidesContainer.style.transform = `translateX(-${currentIndex * width}px)`;
+    }
+
+    document.getElementById('prev').addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    });
+    document.getElementById('next').addEventListener('click', () => {
+      if (currentIndex < WORDS[currentLevel].length - 1) {
+        currentIndex++;
+        updateSlider();
+      }
+    });
+
+    levelButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        levelButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentLevel = btn.dataset.level;
+        loadSlides(currentLevel);
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      updateSlider();
+    });
+
+    // Initial load
+    loadSlides(currentLevel);
+  </script>
+</body>
+</html>
