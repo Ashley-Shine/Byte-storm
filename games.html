@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Games Library</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f3f0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 10px 20px;
+  }
+
+  h1 {
+    color: #4a3f75;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+  }
+
+  .game-card-container {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .game-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    width: 240px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .game-card:hover {
+    transform: scale(1.05);
+  }
+
+  .game-card h2 {
+    color: #4a3f75;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+  }
+
+  .game-card p {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .game-card a {
+    padding: 8px 16px;
+    background-color: #b7aaff;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+    font-size: 0.9rem;
+  }
+
+  .game-card a:hover {
+    background-color: #9f92ff;
+  }
+</style>
+</head>
+<body>
+
+<h1>Select a Game to Play</h1>
+
+<div class="game-card-container">
+  <div class="game-card">
+    <h2>Image Match</h2>
+    <p>Drag the correct name onto the image to match it.</p>
+    <a href="image-match.html">Play</a>
+  </div>
+
+  <div class="game-card">
+    <h2>Sign Puzzle</h2>
+    <p>Unscramble the signs to form the correct word.</p>
+    <a href="sign-puzzle.html">Play</a>
+  </div>
+
+  <div class="game-card">
+    <h2>Gesture Quiz</h2>
+    <p>Choose the correct gesture based on the word shown.</p>
+    <a href="gesture-quiz.html">Play</a>
+  </div>
+</div>
+
+</body>
+</html>
