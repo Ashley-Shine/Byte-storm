@@ -115,13 +115,11 @@
     .buttons {
       position: absolute;
       top: 50%;
-      left: -50px;
-      right: -50px;
-      width: calc(100% + 100px);
+      width: 100%;
       display: flex;
       justify-content: space-between;
       transform: translateY(-50%);
-      pointer-events: none;
+      padding: 0 15px;
     }
 
     .buttons button {
@@ -134,8 +132,6 @@
       border-radius: 50%;
       cursor: pointer;
       transition: background 0.3s;
-      pointer-events: auto;
-      z-index: 2;
     }
 
     .buttons button:hover {
@@ -167,14 +163,6 @@
       text-align: center;
       width: 100%;
     }
-
-    @media (max-width: 500px) {
-      .buttons {
-        left: -30px;
-        right: -30px;
-        width: calc(100% + 60px);
-      }
-    }
   </style>
 </head>
 <body>
@@ -193,13 +181,13 @@
     <div class="section-title">Our Motive</div>
     <div class="motive_slider">
       <div class="motive_slides" id="motive_slides">
-        <div class="card"><strong>🌟 Purpose</strong>To awaken a world of silent speech where every child’s hands become their voice, and every gesture a poem of expression...</div>
+        <div class="card"><strong>🌟 Purpose</strong>To awaken a world of silent speech where every child’s hands become their voice, and every gesture a poem of expression. This is a space where language blooms without sound — tender, vivid, and full of light — guiding deaf and hard-of-hearing children through the gentle art of connection. Here, learning is not a task but a journey of wonder, woven with colors, movement, and imagination. It invites children to discover the joy of being seen, the strength of being understood, and the beauty of communicating in their own rhythm. More than teaching signs, it lights the path to self-worth, belonging, and the quiet power of shared understanding.</div>
 
-        <div class="card"><strong>❤️ Inclusion & Empowerment</strong>Every child deserves to shine — not in silence, but in shared expression...</div>
+        <div class="card"><strong>❤️ Inclusion & Empowerment</strong>Every child deserves to shine — not in silence, but in shared expression. This path honors every unique voice, creating a space where hands speak and hearts listen. It lifts children into a world where they are not just included, but embraced, not just heard, but celebrated. In classrooms, playgrounds, and living rooms, it becomes a quiet revolution of equality, belonging, and dignity. Through language, it gifts them power — the power to say “I am here,” and the world to answer, “We see you.”</div>
 
-        <div class="card"><strong>👨‍👩‍👧‍👦 Family and Community</strong>Learning becomes richer when shared in love. With every sign learned together...</div>
+        <div class="card"><strong>👨‍👩‍👧‍👦 Family and Community</strong>Learning becomes richer when shared in love. With every sign learned together, families grow closer — building bridges of understanding that words alone cannot cross. Caregivers, teachers, and loved ones become companions on the journey, not just observers but co-travelers. This shared rhythm of learning transforms homes into havens of connection and classrooms into communities of care. Together, they create a circle of trust where every child feels held, heard, and home.</div>
 
-        <div class="card"><strong>🎮 Interactive Learning</strong>Wonder becomes the teacher and play becomes the path. Through vivid visuals...</div>
+        <div class="card"><strong>🎮 Interactive Learning</strong>Wonder becomes the teacher and play becomes the path. Through vivid visuals, thoughtful challenges, and joyful repetition, learning unfolds like a story — chapter by chapter, smile by smile. Each child is met where they are, with gentle encouragement and playful progression. Here, games are more than fun; they are bridges to mastery, crafted to match the rhythm of each learner’s heart. It’s not just education — it’s a celebration of growth, curiosity, and the quiet magic of discovery.</div>
       </div>
 
       <div class="buttons">

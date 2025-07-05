@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Explore & Learn</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f0ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 10px 20px;
+    }
+
+    h1 {
+      color: #4a3f75;
+      font-size: 2.2rem;
+      margin-bottom: 25px;
+    }
+
+    .card-container {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .resource-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      width: 260px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .resource-card:hover {
+      transform: scale(1.05);
+    }
+
+    .resource-card h2 {
+      color: #4a3f75;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .resource-card p {
+      color: #555;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .resource-card button {
+      padding: 8px 16px;
+      background-color: #b7aaff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .resource-card button:hover {
+      background-color: #9f92ff;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Explore & Learn</h1>
+
+<div class="card-container">
+
+  <div class="resource-card">
+    <h2>Watch & Learn</h2>
+    <p>Explore sign language through fun and engaging videos.</p>
+    <a href="https://www.youtube.com/watch?v=VIDEO_ID" target="_blank">Watch Now</a>
+  </div>
+
+  <div class="resource-card">
+    <h2>Share Your Experience</h2>
+    <p>Tell us how your learning journey has been so far!</p>
+    <a href="feedback.html">Share Now</a>
+   
+  </div>
+
+  <div class="resource-card">
+    <h2>Learn a Word Daily</h2>
+    <p>Practice a new sign language word every day!</p>
+    <a href="daily-word.html">Start Learning</a>
+  </div>
+
+</div>
+
+</body>
+</html>
