@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Language Quiz Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color:#f3f0ff;
+      padding: 20px;
+    }
+    h1 {
+      color: #4a3f75;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .quiz-card {
+      background: #f3f0ff;
+      border: 0.5px solid #4a3f75;
+      border-radius: 20px;
+      padding: 30px;
+      width: 320px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0.5px solid #4a3f75;
+      border-radius: 8px;
+      padding: 8px;
+      background-color: #fffbe0;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+    .option:hover {
+      background-color: #d9cfff;
+    }
+    .option img {
+      height: 50px;
+      margin-right: 10px;
+    }
+    .next-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      background-color: #4a3f75;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    .next-btn:hover {
+      background-color: #32275c;
+    }
+    .level, .reward {
+      font-size: 20px;
+      margin: 10px;
+      font-weight: bold;
+      color: #211456;
+      .option img {
+  height: 50px;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.option:hover img,
+.option:active img {
+  transform: scale(1.5); /* Makes image 1.5x bigger on touch/hover */
+}
+.option img {
+  height: 50px;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+  cursor: pointer; /* Change cursor to pointer on hover/click */
+}
+
+.option img.enlarged {
+  transform: scale(2); /* Zooms the image */
+  z-index: 10;
+}
+
+    }
+  </style>
+</head>
+<body>
+  <h1>Sign Language Quiz</h1>
+  <div class="level" id="level">Level: 1</div>
+  <div class="quiz-card">
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <button class="next-btn" id="nextBtn" disabled>Next</button>
+  </div>
+  <div class="reward" id="reward"></div>
+
+  <script>
+    const levels = {
+      1: [
+        {
+          question: "What letter is this?",
+          img: "al.PNG",
+          options: [
+            { text: "A", img: "a.png" },
+            { text: "B", img: "b.png" },
+            { text: "C", img: "c.png" }
+          ],
+          answer: "A"
+        },
+        {
+          question: "Pick the sign for letter B",
+          options: [
+            { text: "A", img: "a.png" },
+            { text: "B", img: "b.png" },
+            { text: "C", img: "c.png" }
+          ],
+          answer: "B"
+        }
+      ],
+      2: [
+        {
+          question: "What is the sign for brushing teeth?",
+          img:"teeth1.PNG",
+          options: [
+            { text: "Brush", img: "brush1.PNG" },
+            { text: "Eat", img: "eat1.PNG" },
+            { text: "Sleep", img: "sleep1.PNG" }
+          ],
+          answer: "Brush"
+        },
+        {
+          question: "Which sign means 'Book'?",
+          options: [
+            { text: "Book", img: "book.png" },
+            { text: "Toothbrush", img: "brush1.png" },
+            { text: "Water", img: "water.png" }
+          ],
+          answer: "Book"
+        },
+        {
+          question: "Pick the sign for 'Sleep'.",
+          options: [
+            { text: "Sleep", img: "sleep1.png" },
+            { text: "Bath", img: "bath.png" },
+            { text: "Food", img: "food.png" }
+          ],
+          answer: "Sleep"
+        },
+        {
+          question: "What does this sign represent?",
+          img: "water1.png",
+          options: [
+            { text: "Water" },
+            { text: "Milk" },
+            { text: "Book" }
+          ],
+          answer: "Water"
+        },
+        {question: "Which one means 'Get Dressed'?",
+  options: [
+    { text: "dressed", img: "dressing.png" },
+    { text: "sleep", img: "sleep2.png" },
+    { text: "water", img: "water1.png" }
+  ],
+  answer: "Get Dressed"
+}
+      ]
+    };
+
+    let level = 1;
+    let score = 0;
+    let current = 0;
+    let selectedAnswer = null;
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const nextBtn = document.getElementById("nextBtn");
+    const rewardEl = document.getElementById("reward");
+    const levelEl = document.getElementById("level");
+
+    function loadQuestion() {
+      selectedAnswer = null;
+      nextBtn.disabled = true;
+
+      const q = levels[level][current];
+      questionEl.innerHTML = `
+        <div><strong>Q${current + 1}.</strong> ${q.question}</div>
+        ${q.img ? `<img src="${q.img}" alt="Sign image" style="height: 100px; margin-top: 10px;">` : ''}
+      `;
+      optionsEl.innerHTML = "";
+
+      q.options.forEach(opt => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+
+       btn.innerHTML = `${opt.img ? `<img src="${opt.img}" alt="${opt.text}" class="zoom-img">` : ''} ${opt.text}`;
+
+
+    const imgEl = btn.querySelector("img");
+        if (imgEl) {
+        imgEl.addEventListener("click", (e) => {
+   
+        imgEl.classList.toggle("enlarged");
+  });
+}
+
+        btn.onclick = () => {
+          selectedAnswer = opt.text;
+          document.querySelectorAll('.option').forEach(o => o.style.backgroundColor = "#fffbe0");
+          btn.style.backgroundColor = "#dcedc8";
+          nextBtn.disabled = false;
+        };
+
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    nextBtn.onclick = () => {
+      if (selectedAnswer === levels[level][current].answer) {
+        score++;
+      }
+
+      current++;
+
+      if (current < levels[level].length) {
+        loadQuestion();
+      } else {
+        const total = levels[level].length;
+        const passScore = Math.ceil(total * 0.7);
+
+        if (score >= passScore) {
+          if (levels[level + 1]) {
+            rewardEl.innerText = "🎉 You've unlocked the next level!";
+            score = 0;
+            current = 0;
+            level++;
+            levelEl.innerText = `Level: ${level}`;
+            setTimeout(() => {
+              rewardEl.innerText = "";
+              loadQuestion();
+            }, 2000);
+          } else {
+            rewardEl.innerHTML = `🏆 Congratulations! You've completed all levels!<br>Final Score: ${score}/${total}`;
+            nextBtn.style.display = "none";
+            optionsEl.innerHTML = "";
+          }
+        } else {
+          rewardEl.innerHTML = `🎮 Game Over! Your score: ${score}/${total}<br>Refresh to try again.`;
+          nextBtn.style.display = "none";
+          optionsEl.innerHTML = "";
+        }
+      }
+    };
+
+    loadQuestion();
+  </script>
+</body>
+</html>
